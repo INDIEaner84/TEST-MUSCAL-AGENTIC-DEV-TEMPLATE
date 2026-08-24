@@ -1,0 +1,12 @@
+# Agent runtime output is ephemeral; durable records belong in .ai/HISTORY/.
+.ai/runtime/*
+!.ai/runtime/.gitkeep
+
+# Python protocol tooling
+__pycache__/
+*.py[cod]
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example

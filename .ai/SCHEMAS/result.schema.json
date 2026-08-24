@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai/result.schema.json",
+  "title": "Agent assignment result",
+  "type": "object",
+  "required": [
+    "protocol_version", "kind", "task_id", "workflow", "assignment_id", "role",
+    "state_revision_started", "state_revision_recorded", "status", "summary", "details",
+    "checks", "artifacts", "commit", "completed_at"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "protocol_version": {"const": "1.0"},
+    "kind": {"const": "agent_result"},
+    "task_id": {"type": "string"},
+    "workflow": {"type": "string"},
+    "assignment_id": {"type": "string"},
+    "role": {"$ref": "state.schema.json#/$defs/role"},
+    "state_revision_started": {"type": ["integer", "null"]},
+    "state_revision_recorded": {"type": "integer", "minimum": 1},
+    "status": {"enum": ["succeeded", "failed", "blocked"]},
+    "summary": {"type": "string", "minLength": 1},
+    "details": {"type": ["string", "null"]},
+    "checks": {"type": "array", "items": {"type": "string"}},
+    "artifacts": {"type": "array", "items": {"type": "string"}},
+    "commit": {"type": ["string", "null"]},
+    "completed_at": {"type": "string", "format": "date-time"}
+  }
+}

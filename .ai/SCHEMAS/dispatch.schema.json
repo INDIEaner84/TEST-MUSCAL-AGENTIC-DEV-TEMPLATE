@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai/dispatch.schema.json",
+  "title": "Provider-neutral role dispatch payload",
+  "type": "object",
+  "required": [
+    "protocol_version", "request_id", "task_id", "workflow", "state", "state_revision",
+    "assignment_id", "role", "scope", "instructions", "acceptance_criteria", "repository",
+    "ref", "sha", "task_file", "role_file", "state_file", "context_file"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "protocol_version": {"const": "1.0"},
+    "request_id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "workflow": {"type": "string"},
+    "state": {"type": "string"},
+    "state_revision": {"type": "integer", "minimum": 1},
+    "assignment_id": {"type": "string"},
+    "role": {"$ref": "state.schema.json#/$defs/role"},
+    "scope": {"type": "string"},
+    "instructions": {"type": "string"},
+    "acceptance_criteria": {"type": "array", "items": {"type": "string"}},
+    "repository": {"type": "string"},
+    "ref": {"type": "string"},
+    "sha": {"type": "string"},
+    "task_file": {"type": "string"},
+    "role_file": {"type": "string"},
+    "state_file": {"type": "string"},
+    "context_file": {"type": "string"}
+  }
+}

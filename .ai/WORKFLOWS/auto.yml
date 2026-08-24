@@ -1,0 +1,36 @@
+{
+  "protocol_version": "1.0",
+  "id": "auto",
+  "description": "Task intake mode in which the first orchestrator decision selects a concrete workflow.",
+  "default_max_iterations": 5,
+  "phases": {
+    "COMPLETED": {
+      "description": "The task was already complete when intake was evaluated.",
+      "allowed_roles": [],
+      "terminal": true
+    },
+    "HUMAN_REVIEW_REQUIRED": {
+      "description": "Workflow selection requires a human decision.",
+      "allowed_roles": [],
+      "terminal": true
+    },
+    "BLOCKED": {
+      "description": "No safe workflow can be selected from available information.",
+      "allowed_roles": [],
+      "terminal": true
+    }
+  },
+  "transitions": {
+    "START": ["COMPLETED", "HUMAN_REVIEW_REQUIRED", "BLOCKED"],
+    "COMPLETED": [],
+    "HUMAN_REVIEW_REQUIRED": [],
+    "BLOCKED": []
+  },
+  "completion_criteria": [
+    "A concrete workflow is selected, or the orchestrator records why the task is already complete or needs human input."
+  ],
+  "loop_guards": [
+    "Auto is an intake mode, not an implementation workflow.",
+    "The first active decision must select cleanup, feature, bugfix, refactor, or security."
+  ]
+}

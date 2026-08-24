@@ -1,0 +1,22 @@
+{
+  "$schema": "./SCHEMAS/state.schema.json",
+  "protocol_version": "1.0",
+  "revision": 0,
+  "task_id": null,
+  "task_file": null,
+  "workflow": null,
+  "state": "IDLE",
+  "previous_state": null,
+  "completed_roles": [],
+  "completed_steps": [],
+  "active_assignments": [],
+  "next_role": null,
+  "iteration": 0,
+  "max_iterations": 5,
+  "last_role": null,
+  "last_relevant_commit": null,
+  "reason": "No active task is registered.",
+  "summary": "The agent protocol is ready for a new task.",
+  "blocked": null,
+  "updated_at": null
+}

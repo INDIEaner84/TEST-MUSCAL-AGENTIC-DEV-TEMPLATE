@@ -1,0 +1,16 @@
+{
+  "$schema": "./SCHEMAS/decision.schema.json",
+  "protocol_version": "1.0",
+  "decision_id": null,
+  "task_id": null,
+  "based_on_revision": 0,
+  "workflow": null,
+  "state": "IDLE",
+  "assignments": [],
+  "iteration": 0,
+  "reason": "No orchestrator decision has been recorded yet.",
+  "summary": "Waiting for an active task.",
+  "expected_outcome": null,
+  "mark_steps_completed": [],
+  "created_at": null
+}

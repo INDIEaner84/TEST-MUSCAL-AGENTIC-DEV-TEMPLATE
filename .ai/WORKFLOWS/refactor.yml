@@ -1,0 +1,129 @@
+{
+  "protocol_version": "1.0",
+  "id": "refactor",
+  "description": "Behavior-preserving structural improvement with impact analysis and regression validation.",
+  "default_max_iterations": 4,
+  "phases": {
+    "IMPACT_ANALYSIS_REQUIRED": {
+      "description": "Map affected architecture and callers, establish behavior that must remain stable, and scope the refactor.",
+      "allowed_roles": [
+        "analyzer"
+      ],
+      "terminal": false
+    },
+    "IMPLEMENTATION_REQUIRED": {
+      "description": "A scoped repository change is required.",
+      "allowed_roles": [
+        "worker"
+      ],
+      "terminal": false
+    },
+    "TEST_REQUIRED": {
+      "description": "Tests, build, lint, types, or regression checks must be run or extended.",
+      "allowed_roles": [
+        "tester"
+      ],
+      "terminal": false
+    },
+    "REVIEW_REQUIRED": {
+      "description": "The implementation and evidence need independent review.",
+      "allowed_roles": [
+        "reviewer"
+      ],
+      "terminal": false
+    },
+    "IMPROVEMENT_REQUIRED": {
+      "description": "Review or test evidence identified a concrete, valuable correction.",
+      "allowed_roles": [
+        "worker"
+      ],
+      "terminal": false
+    },
+    "COMPLETED": {
+      "description": "All task acceptance criteria are met and no useful required work remains.",
+      "allowed_roles": [],
+      "terminal": true
+    },
+    "HUMAN_REVIEW_REQUIRED": {
+      "description": "Progress needs a human decision, approval, credential, or conflict resolution.",
+      "allowed_roles": [],
+      "terminal": true
+    },
+    "BLOCKED": {
+      "description": "The task cannot make safe progress with the currently available information or capabilities.",
+      "allowed_roles": [],
+      "terminal": true
+    }
+  },
+  "transitions": {
+    "START": [
+      "IMPACT_ANALYSIS_REQUIRED",
+      "IMPLEMENTATION_REQUIRED",
+      "TEST_REQUIRED",
+      "REVIEW_REQUIRED",
+      "IMPROVEMENT_REQUIRED",
+      "COMPLETED",
+      "HUMAN_REVIEW_REQUIRED",
+      "BLOCKED"
+    ],
+    "IMPACT_ANALYSIS_REQUIRED": [
+      "IMPACT_ANALYSIS_REQUIRED",
+      "IMPLEMENTATION_REQUIRED",
+      "TEST_REQUIRED",
+      "REVIEW_REQUIRED",
+      "COMPLETED",
+      "HUMAN_REVIEW_REQUIRED",
+      "BLOCKED"
+    ],
+    "IMPLEMENTATION_REQUIRED": [
+      "IMPLEMENTATION_REQUIRED",
+      "TEST_REQUIRED",
+      "REVIEW_REQUIRED",
+      "IMPROVEMENT_REQUIRED",
+      "COMPLETED",
+      "HUMAN_REVIEW_REQUIRED",
+      "BLOCKED"
+    ],
+    "TEST_REQUIRED": [
+      "TEST_REQUIRED",
+      "IMPLEMENTATION_REQUIRED",
+      "REVIEW_REQUIRED",
+      "IMPROVEMENT_REQUIRED",
+      "COMPLETED",
+      "HUMAN_REVIEW_REQUIRED",
+      "BLOCKED"
+    ],
+    "REVIEW_REQUIRED": [
+      "REVIEW_REQUIRED",
+      "TEST_REQUIRED",
+      "IMPLEMENTATION_REQUIRED",
+      "IMPROVEMENT_REQUIRED",
+      "COMPLETED",
+      "HUMAN_REVIEW_REQUIRED",
+      "BLOCKED"
+    ],
+    "IMPROVEMENT_REQUIRED": [
+      "IMPROVEMENT_REQUIRED",
+      "TEST_REQUIRED",
+      "REVIEW_REQUIRED",
+      "IMPLEMENTATION_REQUIRED",
+      "COMPLETED",
+      "HUMAN_REVIEW_REQUIRED",
+      "BLOCKED"
+    ],
+    "COMPLETED": [],
+    "HUMAN_REVIEW_REQUIRED": [],
+    "BLOCKED": []
+  },
+  "completion_criteria": [
+    "The targeted structure is measurably clearer or safer without unjustified scope growth.",
+    "Documented external behavior is preserved and relevant checks pass.",
+    "Review finds no unresolved compatibility or maintainability issue."
+  ],
+  "loop_guards": [
+    "A repeated phase requires a new iteration and new evidence or a concrete unresolved finding.",
+    "No active decision may exceed STATE.json max_iterations.",
+    "If progress is blocked or ambiguous, select HUMAN_REVIEW_REQUIRED or BLOCKED.",
+    "Review requests must name actionable findings; perfection-seeking alone is not sufficient."
+  ]
+}

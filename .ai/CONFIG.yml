@@ -1,0 +1,31 @@
+{
+  "protocol_version": "1.0",
+  "dispatch": {
+    "event_type": "ai_role_requested",
+    "adapter": "webhook-or-manual",
+    "max_parallel_assignments": 3,
+    "manual_fallback": true
+  },
+  "role_bindings": {
+    "orchestrator": {
+      "provider": "configure-via-agent-webhook",
+      "capabilities": ["repository-read", "state-write"]
+    },
+    "analyzer": {
+      "provider": "configure-via-agent-webhook",
+      "capabilities": ["repository-read", "history-write"]
+    },
+    "worker": {
+      "provider": "configure-via-agent-webhook",
+      "capabilities": ["repository-read", "repository-write", "command-execution"]
+    },
+    "reviewer": {
+      "provider": "configure-via-agent-webhook",
+      "capabilities": ["repository-read", "history-write"]
+    },
+    "tester": {
+      "provider": "configure-via-agent-webhook",
+      "capabilities": ["repository-read", "command-execution", "history-write"]
+    }
+  }
+}

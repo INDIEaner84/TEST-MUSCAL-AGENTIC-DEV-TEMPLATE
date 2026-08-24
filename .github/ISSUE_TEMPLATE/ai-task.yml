@@ -1,0 +1,44 @@
+name: AI-assisted task
+description: Propose a task for the repository-backed multi-agent workflow
+title: "[AI task] "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe a durable task. After triage, a maintainer starts it through **Actions → AI Task Intake**. Creating this issue alone does not mutate `.ai/STATE.json`.
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Workflow
+      options:
+        - feature
+        - bugfix
+        - cleanup
+        - refactor
+        - security
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: State the user-visible or repository outcome, not an implementation guess.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List observable conditions that make the task complete.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints, risks, and relevant context
+      description: Include compatibility, security, migration, or scope boundaries. Never include secrets.
